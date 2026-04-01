@@ -17,7 +17,7 @@ const PostCard = ({ post }) => {
     const [isLikesModalOpen, setLikesModalOpen] = useState(false);
     const [newComment, setNewComment] = useState("");
     const isLiked = currentUser ? likes.includes(currentUser) : false;
-
+    const BACKEND_URL = import.meta.env.VITE_API_URL.replace('/api', '') || 'http://localhost:5001';
     const handleCommentSubmit = async () => {
         if (!newComment.trim() || !currentUser) return;
         try {
@@ -86,7 +86,12 @@ const PostCard = ({ post }) => {
 
             {post.image && (
                 <Box sx={{ mb: 3, textAlign: 'center' }}>
-                    <img src={`http://localhost:5001${post.image}`} alt="Post content" style={{ maxWidth: '100%', maxHeight: 400, objectFit: 'contain', borderRadius: 8 }} />
+                    {/* 2. Replace localhost with the BACKEND_URL variable */}
+                    <img
+                        src={`${BACKEND_URL}${post.image}`}
+                        alt="Post content"
+                        style={{ maxWidth: '100%', maxHeight: 400, objectFit: 'contain', borderRadius: 8 }}
+                    />
                 </Box>
             )}
 
