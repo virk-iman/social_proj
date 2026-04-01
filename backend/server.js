@@ -9,7 +9,15 @@ import path from 'path';
 dotenv.config();
 
 const app = express();
-app.use(cors());
+
+// Replace app.use(cors()); with this block:
+app.use(cors({
+    origin: 'https://social-proj-roan.vercel.app', // ⚠️ REPLACE THIS with your exact Vercel URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
+
+
 app.use(express.json());
 
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
